@@ -1,26 +1,23 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 
+
+from django.shortcuts import render, redirect
+
+from catalog.forms import ProductForm
 from catalog.models import Product, ContactInfo
+from django.contrib import messages
 
 
-def home(request):
-    latest_products = Product.objects.order_by('-created_at')[:5]
 
-    for product in latest_products:
-        print(product)
+def index(request):
 
-    context = {'latest_products': latest_products}
+    products = Product.objects.all()
 
-    return render(request, 'catalog/home.html', context)
+    context = {'products': products}
+
+    return render(request, 'catalog/index.html', context)
 
 
 def contacts(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        phone = request.POST.get('phone')
-        message = request.POST.get('message')
-        return HttpResponse('Данные успешно отправлены!')
 
     contact_info = ContactInfo.objects.all()
 
@@ -29,3 +26,28 @@ def contacts(request):
     }
 
     return render(request, 'catalog/contacts.html', context)
+
+
+def product_details(request, pk):
+
+    products = Product.objects.get(pk=pk)
+
+    context = {'products': products}
+
+    return render(request, 'catalog/product_details.html', context)
+
+
+
+# def add_product(request):
+#     return render(request, 'catalog/add_product.html')
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Успешно добавлено! Переходим на главную страницу.')
+
+    else:
+        form = ProductForm()
+    return render(request, 'catalog/add_product.html', {'form': form})
