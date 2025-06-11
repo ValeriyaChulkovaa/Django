@@ -4,19 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e0b71b9-e944-46c4-a8db-49fd7d533659" name="Changes" comment="Django Homework 22">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+    <list default="true" id="7e0b71b9-e944-46c4-a8db-49fd7d533659" name="Changes" comment="Django Homework 23">
+      <change afterPath="$PROJECT_DIR$/catalog/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog/templates/catalog/add_product.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog/templates/catalog/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog/templates/catalog/header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog/templates/catalog/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog/templates/catalog/product_details.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog/templates/catalog/sing_up.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog/templatetags/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/catalog/templatetags/my_tag.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/catalog/photo/iphone_11_fioletovyy.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/catalog/photo/iphone_11_fioletovyy_1gYaCmG.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/catalog/photo/iphone_11_fioletovyy_8yJuVIr.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/catalog/photo/iphone_11_fioletovyy_FHaJP9T.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/catalog/photo/iphone_11_fioletovyy_TflhnBK.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/catalog/photo/iphone_11_fioletovyy_Yvu1ehg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/catalog/photo/Снимок_экрана_2024-10-24_010531.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/sticky-footer-navbar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/color-modes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product_fixture.json" beforeDir="false" afterPath="$PROJECT_DIR$/Product_fixture.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catalog/templates/catalog/contacts.html" beforeDir="false" afterPath="$PROJECT_DIR$/catalog/templates/catalog/contacts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catalog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/catalog/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catalog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/catalog/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/Homewor_22" />
+        <entry key="$PROJECT_DIR$" value="feature/Homewor_23" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,7 +64,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature/Homewor__23",
+    "git-widget-placeholder": "feature/Homework__24",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>
@@ -82,7 +113,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749658400901</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Django Homework 23">
+      <option name="closed" value="true" />
+      <created>1749659016019</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1749659016019</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -100,6 +139,7 @@
     <MESSAGE value="init" />
     <MESSAGE value="fixes for dev" />
     <MESSAGE value="Django Homework 22" />
-    <option name="LAST_COMMIT_MESSAGE" value="Django Homework 22" />
+    <MESSAGE value="Django Homework 23" />
+    <option name="LAST_COMMIT_MESSAGE" value="Django Homework 23" />
   </component>
 </project>
