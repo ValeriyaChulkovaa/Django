@@ -1,53 +1,31 @@
-
-
-from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView
 
 from catalog.forms import ProductForm
 from catalog.models import Product, ContactInfo
-from django.contrib import messages
 
 
-
-def index(request):
-
-    products = Product.objects.all()
-
-    context = {'products': products}
-
-    return render(request, 'catalog/index.html', context)
+class IndexListView(ListView):
+    model = Product
+    template_name = 'catalog/index.html'
+    context_object_name = 'products'
 
 
-def contacts(request):
-
-    contact_info = ContactInfo.objects.all()
-
-    context = {
-        'contact_info': contact_info,
-    }
-
-    return render(request, 'catalog/contacts.html', context)
+class ContactsListView(ListView):
+    model = ContactInfo
+    template_name = 'catalog/contacts.html'
+    context_object_name = 'contact_info'
 
 
-def product_details(request, pk):
-
-    products = Product.objects.get(pk=pk)
-
-    context = {'products': products}
-
-    return render(request, 'catalog/product_details.html', context)
+class ProductDetailsView(DetailView):
+    model = Product
+    template_name = 'catalog/product_details.html'
+    context_object_name = 'products'
 
 
+class AddProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog/add_product.html'
 
-# def add_product(request):
-#     return render(request, 'catalog/add_product.html')
-
-def add_product(request):
-    if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Успешно добавлено! Переходим на главную страницу.')
-
-    else:
-        form = ProductForm()
-    return render(request, 'catalog/add_product.html', {'form': form})
+    def get_success_url(self):
+        return f'/product_details/{self.object.pk}/'
