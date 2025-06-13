@@ -1,26 +1,36 @@
-
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+from django.http import Http404
+from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from catalog.forms import ProductFormValidator
-from catalog.models import Product, ContactInfo
+from catalog.models import Product, ContactInfo, Category
+from catalog.services import get_product_list_cache, get_products_by_category
 
 
 class IndexListView(ListView):
+    ''' Главной страница, просмотр списка продуктов'''
     model = Product
     template_name = 'catalog/index.html'
     context_object_name = 'products'
     permission_required = 'catalog.view_product'
 
+    def get_queryset(self):
+        return get_product_list_cache()
 
 
 class ContactsListView(ListView):
+    '''Страница Контактов '''
     model = ContactInfo
     template_name = 'catalog/contacts.html'
     context_object_name = 'contact_info'
 
 
+@method_decorator(cache_page(60 * 5), name='dispatch')
 class ProductDetailsView(LoginRequiredMixin, DetailView):
+    '''Страцина детальной информации продукта, с возможностью редактирования и удаления. Добавил кеширование '''
     model = Product
     template_name = 'catalog/product_details.html'
     context_object_name = 'products'
@@ -28,11 +38,11 @@ class ProductDetailsView(LoginRequiredMixin, DetailView):
 
 
 class AddProductCreateView(LoginRequiredMixin, CreateView):
+    '''Страница добавления продукта '''
     model = Product
     template_name = 'catalog/add_product.html'
     permission_required = 'catalog.add_product'
     form_class = ProductFormValidator
-
 
     def get_success_url(self):
         return f'/product_details/{self.object.pk}/'
@@ -48,6 +58,7 @@ class AddProductCreateView(LoginRequiredMixin, CreateView):
 
 
 class EditProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    '''Страница редактирования продукта, только для владельцев и суперюзеров'''
     model = Product
     form_class = ProductFormValidator
     context_object_name = 'products'
@@ -77,7 +88,9 @@ class EditProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
     #         return Product.objects.none()
     #     return Product.objects.all()
 
+
 class DeleteProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    '''Страница удаления продукта, только для владельцев и суперюзеров'''
     model = Product
     template_name = 'catalog/delete_product.html'
     success_url = '/'
@@ -94,3 +107,19 @@ class DeleteProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteVie
         """Обработка отказа в доступе"""
         from django.http import HttpResponseForbidden
         return HttpResponseForbidden("Вы не являетесь владельцем этого продукта")
+
+
+def products_by_category(request, category_name):
+    '''Страница всех продуктов определенной категории  '''
+    products = get_products_by_category(category_name)
+
+    if not products:
+        raise Http404("Категория не найдена или в этой категории нет товаров.")
+
+    category_exists = Category.objects.filter(name=category_name).exists()
+
+    return render(request, 'catalog/products_by_category.html', {
+        'products': products,
+        'category_name': category_name,
+        'category_exists': category_exists
+    })

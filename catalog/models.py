@@ -4,6 +4,7 @@ from users.models import User
 
 
 class Product(models.Model):
+    '''Модель продукта '''
     name = models.CharField(max_length=100, verbose_name='Наименование', help_text='Введите наименование')
     description = models.TextField(verbose_name='Описание', blank=True, null=True, help_text='Введите описание')
     images = models.ImageField(upload_to='catalog/photo', verbose_name='Фото', blank=True, null=True,
@@ -16,7 +17,8 @@ class Product(models.Model):
 
     is_published = models.BooleanField(default=False, verbose_name='Публикация')
 
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, max_length=200, verbose_name='Владелец', related_name='Product')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, max_length=200, verbose_name='Владелец',
+                              related_name='Product')
 
     class Meta:
         verbose_name = 'Продукт'
@@ -33,6 +35,7 @@ class Product(models.Model):
 
 
 class Category(models.Model):
+    '''Модель категории продукта '''
     name = models.CharField(max_length=100, verbose_name='Наименование', help_text='Введите наименование')
     description = models.TextField(blank=True, null=True, verbose_name='Описание', help_text='Введите описание')
 
@@ -46,6 +49,7 @@ class Category(models.Model):
 
 
 class ContactInfo(models.Model):
+    '''Модель контактов '''
     name = models.CharField(max_length=100, verbose_name='Имя', help_text='Введите имя')
     phone = models.CharField(max_length=20, verbose_name='Номер телефона', help_text='Введите номер телефона')
     email = models.EmailField(verbose_name='Email', help_text='Введите Email')

@@ -14,6 +14,7 @@
                 <h5 class="card-title">{{ product }}</h5>
 
                 {% if request.user|in_group:"Модератор продуктов" or request.user.is_superuser %}
+
                     {% if product.is_published %}
                         <h6 style="color: green;">(Опубликован)</h6>
                     {% else %}
@@ -24,6 +25,8 @@
                 <h6 class="card-subtitle mb-2 text-body-secondary">Цена {{ product.purchase_price }} ₽</h6>
                 <p class="card-text">{{ product.description|truncatechars:50 }}</p>
                 <a href="{% url 'catalog:product_details' product.pk  %}" class="btn btn-sm btn-secondary d-block mx-auto">Посмотреть</a>
+
+                <a href="{% url 'catalog:products_by_category' product.category  %}" class="btn btn-sm btn-secondary d-block mx-auto mt-2">Все продукты категории: {{ product.category }}</a>
               </div>
             </div>
         {% else %}
