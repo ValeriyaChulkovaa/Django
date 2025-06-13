@@ -4,6 +4,8 @@ from PIL import Image
 
 
 class ProductForm(forms.ModelForm):
+    ''' Форма продуктов '''
+
     class Meta:
         model = Product
         fields = ['name', 'description', 'images', 'category', 'purchase_price']
@@ -31,6 +33,8 @@ class ProductForm(forms.ModelForm):
 
 
 class ProductFormValidator(forms.ModelForm):
+    '''Форма для продукта, с валидацией '''
+
     class Meta:
         model = Product
         fields = ['name', 'description', 'images', 'category', 'is_published', 'purchase_price']
@@ -45,14 +49,15 @@ class ProductFormValidator(forms.ModelForm):
         self.fields['purchase_price'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите цену'})
         self.fields['is_published'].widget.attrs.update({'class': 'form-'})
 
-
     def clean_purchase_price(self):
+        '''Функция проверки цены продукта '''
         price = self.cleaned_data.get('purchase_price')
         if price is not None and price < 0:
             raise forms.ValidationError('Цена не может быть отрицательной.')
         return price
 
     def clean(self):
+        '''Функция проверки запрещенных слов '''
         cleaned_data = super().clean()
         DANGER_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
