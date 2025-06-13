@@ -33,7 +33,7 @@ class ProductForm(forms.ModelForm):
 class ProductFormValidator(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'images', 'category', 'purchase_price']
+        fields = ['name', 'description', 'images', 'category', 'is_published', 'purchase_price']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,6 +43,7 @@ class ProductFormValidator(forms.ModelForm):
         self.fields['images'].widget.attrs.update({'class': 'form-control-file'})
         self.fields['category'].widget.attrs.update({'class': 'form-control'})
         self.fields['purchase_price'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите цену'})
+        self.fields['is_published'].widget.attrs.update({'class': 'form-'})
 
 
     def clean_purchase_price(self):
