@@ -37,22 +37,6 @@
                 </div>
 
 
-                {% if messages %}
-                    <div id="notification" class="alert alert-success">
-                        {% for message in messages %}
-                            {{ message }}
-                        {% endfor %}
-                    </div>
-                    <script>
-                        setTimeout(function() {
-                            document.getElementById('notification').style.display = 'none';
-                            window.location.href = "{% url 'catalog:index' %}"; // Замените на нужный вам URL
-                        }, 3000); // 3000 мс = 3 секунды
-                    </script>
-                {% endif %}
-
-
-
                 <button type="submit" class="btn btn-primary">Сохранить</button>
                 <a href="{% url 'catalog:index' %}" class="btn btn-secondary">Назад</a>
             </form>
